@@ -44,7 +44,7 @@ A schema designed to utilize Bitcoin cryptocurrency for secure and simple electr
  - Voters send 0.00000001 BTC to their preferred candidate's Bitcoin addresses publicly listed in the Blockchain.
 
 5. **Validation:**
-- The process of voting will have an extra step to make it full transparent: voters should check that BTC is only present in Candidate address that they vote.
+ - The process of voting will have an extra step to make it full transparent: voters should check that BTC is only present in Candidate address that they vote.
 
 6. **Ending the election:**
  - Election ends when all voting transactions are processed for each candidate in the Blockchain.
