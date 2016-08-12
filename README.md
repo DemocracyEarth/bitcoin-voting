@@ -43,12 +43,15 @@ A schema designed to utilize Bitcoin cryptocurrency for secure and simple electr
 4. **Voting:**
  - Voters send 0.00000001 BTC to their preferred candidate's Bitcoin addresses publicly listed in the Blockchain.
 
-5. **Ending the election:**
+5. **Validation:**
+ - The process of voting will have an extra step to make it full transparent: voters should check that BTC is only present in Candidate address that they vote.
+
+6. **Ending the election:**
  - Election ends when all voting transactions are processed for each candidate in the Blockchain.
  - If time limit is put in place, Election Authority must declare the election start and end date and time.
  - If this is a time limited election, any vote before the start datetime and after end datetime is considered invalid.
 
-6. **Election result:**
+7. **Election result:**
  - Election result is obtained by counting all valid voting transactions from the registered voting addresses to the registered candidate addresses in the Blockchain.
  - Any other transaction after the first 0.00000001 BTC transaction from the Voter to the Candidate is considered disqualified.
  - The whole process from the registrations to the voting and counting the results is open to audition by anyone.
