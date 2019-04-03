@@ -1,54 +1,55 @@
-contract Election {  
+pragma solidity ^0.5.6;
+contract Election {
     address electionAuthority;
-    uint electionEndTime; 
+    uint electionEndTime;
     string[] candidates; // Registered candidates
     mapping (string => uint) votes; // Candidate ID to number of votes
     mapping (address => bool) voters; // Registered voters
     mapping (address => bool) hasVoted; // If a registered voter has voted or not
     
-    function Election(){
+    constructor() public{
         electionAuthority = msg.sender;
     }
     
     modifier only_election_authority() {
-        if (msg.sender != electionAuthority) throw;
-        _
+        if (msg.sender != electionAuthority) revert();
+        _;
     }
     
     modifier only_registered_voters() {
-        if (!voters[msg.sender]) throw;
-        _
+        if (!voters[msg.sender]) revert();
+        _;
     }
     
     modifier vote_only_once() {
-        if (hasVoted[msg.sender]) throw;
-        _
+        if (hasVoted[msg.sender]) revert();
+        _;
     }
     
     modifier only_during_election_time() {
-        if (electionEndTime == 0 || electionEndTime > block.timestamp) throw;
-        _
+        if (electionEndTime == 0 || electionEndTime > block.timestamp) revert();
+        _;
     }
     
-    function start_election(uint duration)
+    function start_election(uint duration) public
         only_election_authority
     {
         electionEndTime = block.timestamp + duration;
     }
   
-    function register_candidate(string id)
+    function register_candidate(string memory id) public
         only_election_authority
     {
         candidates.push(id);
     }
     
-    function register_voter(address addr)
+    function register_voter(address addr) public
         only_election_authority
     {
         voters[addr] = true;
     }
     
-    function vote(string id)
+    function vote(string memory id) public
         only_registered_voters
         vote_only_once
         only_during_election_time
@@ -57,13 +58,13 @@ contract Election {
         hasVoted[msg.sender] = true;
     }
     
-    function get_num_candidates() constant returns(uint) {
+    function get_num_candidates() public view returns(uint) {
         
         return candidates.length;
     }
     
-    function get_candidate(uint i)
-        constant returns(string _candidate, uint _votes)
+    function get_candidate(uint i) public
+        view returns(string memory _candidate, uint _votes)
     {
         _candidate = candidates[i];
         _votes = votes[_candidate];
